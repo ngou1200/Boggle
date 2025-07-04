@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boggle Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Boggle Game</h1>
+            <div class="mode-selector">
+                <button id="pvp-mode" class="mode-btn active">Player vs Player</button>
+                <button id="ai-player-mode" class="mode-btn">AI vs Player</button>
+                <button id="ai-ai-mode" class="mode-btn">AI vs AI</button>
+            </div>
+        </header>
+
+        <div class="game-setup" id="game-setup">
+            <div class="setup-controls">
+                <div class="wordlist-upload">
+                    <label for="wordlist-file">Upload Wordlist (wordlist.txt):</label>
+                    <input type="file" id="wordlist-file" accept=".txt" required>
+                    <div class="wordlist-status" id="wordlist-status">No wordlist loaded</div>
+                </div>
+                
+                <div class="game-settings">
+                    <label for="game-duration">Game Duration (seconds):</label>
+                    <input type="number" id="game-duration" value="180" min="60" max="600">
+                    
+                    <label for="board-size">Board Size:</label>
+                    <select id="board-size">
+                        <option value="4">4x4 (Classic)</option>
+                        <option value="5">5x5 (Large)</option>
+                        <option value="6">6x6 (Extra Large)</option>
+                    </select>
+                </div>
+                
+                <button id="start-game" class="btn-primary" disabled>Start Game</button>
+            </div>
+        </div>
+
+        <div class="game-area" id="game-area" style="display: none;">
+            <div class="game-info">
+                <div class="timer">
+                    <span>Time: </span>
+                    <span id="time-display">3:00</span>
+                </div>
+                <div class="game-mode-display" id="game-mode-display">Player vs Player</div>
+                <button id="end-game" class="btn-secondary">End Game</button>
+            </div>
+
+            <div class="game-board-container">
+                <div class="board-wrapper">
+                    <div class="boggle-board" id="boggle-board"></div>
+                    <div class="current-word" id="current-word"></div>
+                </div>
+            </div>
+
+            <div class="players-area">
+                <div class="player-section" id="player1-section">
+                    <h3>Player 1</h3>
+                    <div class="score" id="player1-score">0</div>
+                    <div class="word-input" id="player1-input">
+                        <input type="text" id="player1-word" placeholder="Enter word..." maxlength="20">
+                        <button id="player1-submit">Submit</button>
+                    </div>
+                    <div class="found-words" id="player1-words"></div>
+                </div>
+
+                <div class="player-section" id="player2-section">
+                    <h3 id="player2-title">Player 2</h3>
+                    <div class="score" id="player2-score">0</div>
+                    <div class="word-input" id="player2-input">
+                        <input type="text" id="player2-word" placeholder="Enter word..." maxlength="20">
+                        <button id="player2-submit">Submit</button>
+                    </div>
+                    <div class="found-words" id="player2-words"></div>
+                    <div class="ai-thinking" id="ai-thinking" style="display: none;">
+                        <div class="thinking-indicator">🤖 AI is thinking...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="game-results" id="game-results" style="display: none;">
+            <h2>Game Over!</h2>
+            <div class="final-scores">
+                <div class="player-result">
+                    <h3 id="winner-player1">Player 1</h3>
+                    <div class="final-score" id="final-score1">0</div>
+                    <div class="word-count" id="word-count1">0 words</div>
+                </div>
+                <div class="vs">VS</div>
+                <div class="player-result">
+                    <h3 id="winner-player2">Player 2</h3>
+                    <div class="final-score" id="final-score2">0</div>
+                    <div class="word-count" id="word-count2">0 words</div>
+                </div>
+            </div>
+            <div class="winner-announcement" id="winner-announcement"></div>
+            <div class="game-stats" id="game-stats"></div>
+            <button id="new-game" class="btn-primary">New Game</button>
+        </div>
+    </div>
+
+    <script src="algorithm.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>
